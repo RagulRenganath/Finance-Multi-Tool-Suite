@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Finance Multi-Tool Suite — Attractive Theme</title>
+<style>
+  :root{
+    --bg1: linear-gradient(135deg,#0f172a 0%, #0b3a66 40%, #05223a 100%);
+    --card: rgba(255,255,255,0.06);
+    --glass: rgba(255,255,255,0.04);
+    --accent: #06b6d4;
+    --accent-2:#7c3aed;
+    --muted: rgba(255,255,255,0.78);
+    --glass-border: rgba(255,255,255,0.06);
+    --success: #10b981;
+    --danger: #ef4444;
+    --shadow: 0 8px 30px rgba(2,6,23,0.6);
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: var(--bg1);
+    color: #e6eef8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .wrap{
+    max-width:1100px;
+    margin:28px auto;
+    padding:26px;
+  }
+
+  header.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:20px;
+  }
+
+  .brand {
+    display:flex;gap:12px;align-items:center;
+  }
+  .logo{
+    width:56px;height:56px;border-radius:12px;
+    background: linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow: 0 6px 18px rgba(12,36,60,0.45);
+    transform: translateZ(0);
+  }
+  .logo svg{width:30px;height:30px;fill:white;opacity:0.98}
+  .title{
+    line-height:1;
+  }
+  .title h1{margin:0;font-size:18px;letter-spacing:0.2px}
+  .title p{margin:0;font-size:12px;color:var(--muted);}
+
+  .controls {
+    display:flex;align-items:center;gap:12px;
+  }
+  .btn {
+    background:transparent;border:1px solid var(--glass-border);color:var(--muted);
+    padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;
+    backdrop-filter: blur(6px); transition: all .18s ease;
+  }
+  .btn:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
+  .btn.primary{
+    background: linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white;border:0; box-shadow: 0 8px 30px rgba(99,102,241,0.14);
+  }
+
+  main.grid{
+    display:grid;
+    grid-template-columns: 320px 1fr;
+    gap:18px;
+  }
+
+  /* Sidebar */
+  aside.panel{
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border-radius: var(--radius);
+    padding:14px;
+    border:1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    height: calc(100vh - 160px);
+    position:sticky; top:28px; overflow:auto;
+  }
+
+  nav.tools{ display:flex; flex-direction:column; gap:8px; }
+  nav .tool-btn{
+    display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;
+    cursor:pointer;color:var(--muted); border:1px solid transparent;
+    transition: all .15s ease;
+    background:transparent;
+  }
+  nav .tool-btn:hover{ transform:translateX(6px); background:rgba(255,255,255,0.02)}
+  nav .tool-btn.active{
+    background: linear-gradient(90deg, rgba(6,182,212,0.16), rgba(124,58,237,0.12));
+    color: white; border:1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 24px rgba(7,12,30,0.7);
+  }
+  nav .tool-btn svg{width:18px;height:18px;opacity:0.95}
+
+  /* Content area */
+  section.content{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: var(--radius);
+    padding:20px;
+    min-height:520px;
+    border:1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+  }
+
+  .grid-tools{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+  }
+
+  .card{
+    background: rgba(255,255,255,0.03);
+    padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+    transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s;
+  }
+  .card:hover{ transform: translateY(-6px); box-shadow: 0 14px 40px rgba(2,8,30,0.6) }
+
+  label{display:block;font-size:12px;color:var(--muted); margin-bottom:6px}
+  input[type="number"], select, input[type="text"]{
+    width:100%; padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    color: #e6eef8; outline:none;
+  }
+  .action{
+    margin-top:10px;display:flex;gap:10px;
+  }
+  .btn.action{
+    flex:1;padding:10px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white;font-weight:700;
+  }
+
+  .output{
+    margin-top:12px;padding:12px;border-radius:8px;background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.03); color: #dff7ff; font-weight:600;
+  }
+
+  canvas{width:100%;height:200px;border-radius:8px; background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent); display:block}
+
+  footer.note{
+    margin-top:18px;color:rgba(255,255,255,0.65);font-size:13px;text-align:center;
+  }
+
+  /* Responsive */
+  @media (max-width:960px){
+    main.grid{ grid-template-columns: 1fr; }
+    aside.panel{ position:relative;height:auto; }
+    .grid-tools{ grid-template-columns: 1fr; }
+    canvas{height:180px}
+  }
+
+  /* small utility */
+  .muted{ color:var(--muted); font-size:13px }
+  .tiny{ font-size:12px; color:rgba(255,255,255,0.6) }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden>
+          <!-- finance icon -->
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 20h16v-2H4v2zm2-7h3v7H6v-7zm5-5h3v12h-3V8zm5-6h3v18h-3V2z"></path></svg>
+        </div>
+        <div class="title">
+          <h1>Finance Multi-Tool Suite</h1>
+          <p>Financial Interest Visualization + Budgeting + Loan checks — single page</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn tiny" id="themeToggle" title="Toggle theme (light/dark)">🌗 Theme</button>
+        <button class="btn primary" onclick="downloadHtml()">Download HTML</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <aside class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div>
+            <div class="tiny">Student</div>
+            <div style="font-weight:700">Your Name Here</div>
+            <div class="muted tiny">Course / Assignment</div>
+          </div>
+          <div style="text-align:right">
+            <div class="tiny">Due</div>
+            <div style="font-weight:700">DD-MM-YYYY</div>
+          </div>
+        </div>
+
+        <nav class="tools" role="navigation" aria-label="Tools">
+          <div class="tool-btn active" data-target="interest" onclick="activate(this)">
+            <svg viewBox="0 0 24 24"><path d="M3 13h2v8H3v-8zm4-6h2v14H7V7zm4 4h2v10h-2V11zm4-8h2v18h-2V3z"/></svg>
+            <div>
+              <div style="font-weight:700">Interest Tool</div>
+              <div class="tiny muted">SI & CI + Visual</div>
+            </div>
+          </div>
+
+          <div class="tool-btn" data-target="budget" onclick="activate(this)">
+            <svg viewBox="0 0 24 24"><path d="M3 13h2v8H3v-8zm4-6h2v14H7V7zm4 4h2v10h-2V11zm4-8h2v18h-2V3z"/></svg>
+            <div>
+              <div style="font-weight:700">Budget Visualizer</div>
+              <div class="tiny muted">Income vs Expenses</div>
+            </div>
+          </div>
+
+          <div class="tool-btn" data-target="afford" onclick="activate(this)">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <div>
+              <div style="font-weight:700">Loan Affordability</div>
+              <div class="tiny muted">EMI-to-Income ratio</div>
+            </div>
+          </div>
+
+          <div class="tool-btn" data-target="savings" onclick="activate(this)">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9.3L6.9 7l5.1-2.6 5.1 2.6L12 11.3zM2 17v2l10 5 10-5v-2l-10 5L2 17z"/></svg>
+            <div>
+              <div style="font-weight:700">Savings Planner</div>
+              <div class="tiny muted">Target monthly plan</div>
+            </div>
+          </div>
+
+          <div class="tool-btn" data-target="currency" onclick="activate(this)">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.25 3.61 10.74 9 12 5.39-1.26 9-6.75 9-12V5l-9-4zm1 17.93c-3.95-.5-7-3.85-7-7.93V6.47l7-3.11 7 3.11v4.43c0 4.08-3.05 7.43-7 7.93z"/></svg>
+            <div>
+              <div style="font-weight:700">Currency Converter</div>
+              <div class="tiny muted">Offline rates</div>
+            </div>
+          </div>
+
+        </nav>
+
+        <div style="margin-top:18px;font-size:13px;color:rgba(255,255,255,0.7)">
+          <div style="margin-bottom:6px;font-weight:700">Quick Tips</div>
+          <div class="tiny muted">• Keep EMI below 30% of income. <br>• Larger down payment reduces interest. <br>• Track expenses monthly.</div>
+        </div>
+      </aside>
+
+      <section class="content" id="content-area">
+        <!-- Interest Tool -->
+        <div id="interest" class="tool-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div>
+              <h3 style="margin:0 0 6px 0">Interest Visualization</h3>
+              <div class="tiny muted">Compare Simple vs Compound interest, visualized.</div>
+            </div>
+            <div class="tiny muted">Powered offline • No internet needed</div>
+          </div>
+
+          <div class="grid-tools">
+            <div class="card">
+              <label>Principal (₹)</label>
+              <input id="p" type="number" placeholder="e.g., 500000">
+              <label>Annual Rate (%)</label>
+              <input id="r" type="number" placeholder="e.g., 9">
+              <label>Time (Years)</label>
+              <input id="t" type="number" placeholder="e.g., 5">
+              <div class="action">
+                <button class="btn action" onclick="interestCalc()">Calculate & Visualize</button>
+                <button class="btn" onclick="fillExample()">Example</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="output" id="interestOut">Results appear here</div>
+              <canvas id="interestChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Budget Visualizer -->
+        <div id="budget" class="tool-panel" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div>
+              <h3 style="margin:0 0 6px 0">Budget Breakdown Visualizer</h3>
+              <div class="tiny muted">Quick pie view of expenses vs savings.</div>
+            </div>
+            <div class="tiny muted">Try sample values</div>
+          </div>
+
+          <div class="grid-tools">
+            <div class="card">
+              <label>Monthly Income (₹)</label>
+              <input id="income" type="number" placeholder="e.g., 40000">
+              <label>Total Monthly Expenses (₹)</label>
+              <input id="expense" type="number" placeholder="e.g., 25000">
+              <div class="action">
+                <button class="btn action" onclick="budgetCalc()">Show Chart</button>
+                <button class="btn" onclick="fillBudget()">Sample</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="output" id="budgetOut">Income/Expense breakdown</div>
+              <canvas id="budgetChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Affordability -->
+        <div id="afford" class="tool-panel" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div>
+              <h3 style="margin:0 0 6px 0">Loan Affordability Checker</h3>
+              <div class="tiny muted">EMI-to-Income ratio with a recommendation.</div>
+            </div>
+            <div class="tiny muted">Fast check</div>
+          </div>
+
+          <div class="grid-tools">
+            <div class="card">
+              <label>Monthly EMI (₹)</label>
+              <input id="emi" type="number" placeholder="e.g., 10375">
+              <label>Monthly Income (₹)</label>
+              <input id="inc" type="number" placeholder="e.g., 40000">
+              <div class="action">
+                <button class="btn action" onclick="affordCheck()">Check</button>
+                <button class="btn" onclick="fillAfford()">Sample</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="output" id="affordOut">Affordability result</div>
+              <div style="margin-top:10px;font-size:13px;color:rgba(255,255,255,0.7)">
+                Tip: Keep EMI <= 30% monthly income for safe borrowing.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Savings -->
+        <div id="savings" class="tool-panel" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div>
+              <h3 style="margin:0 0 6px 0">Savings Goal Planner</h3>
+              <div class="tiny muted">Monthly amount to reach target in time.</div>
+            </div>
+            <div class="tiny muted">Simple math</div>
+          </div>
+
+          <div class="grid-tools">
+            <div class="card">
+              <label>Goal Amount (₹)</label>
+              <input id="goal" type="number" placeholder="e.g., 200000">
+              <label>Months to Save</label>
+              <input id="months" type="number" placeholder="e.g., 24">
+              <div class="action">
+                <button class="btn action" onclick="goalCalc()">Calculate</button>
+                <button class="btn" onclick="fillSavings()">Sample</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="output" id="goalOut">Monthly plan will appear here</div>
+              <div style="margin-top:10px;font-size:13px;color:rgba(255,255,255,0.7)">
+                Consider adding SIPs or recurring deposits to automate savings.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Currency -->
+        <div id="currency" class="tool-panel" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+            <div>
+              <h3 style="margin:0 0 6px 0">Offline Currency Converter</h3>
+              <div class="tiny muted">Predefined rates — no API required.</div>
+            </div>
+            <div class="tiny muted">Rates static</div>
+          </div>
+
+          <div class="grid-tools">
+            <div class="card">
+              <label>Amount (₹)</label>
+              <input id="amt" type="number" placeholder="e.g., 1000">
+              <label>Convert to</label>
+              <select id="curr">
+                <option value="0.012">USD (approx)</option>
+                <option value="0.011">EUR (approx)</option>
+                <option value="0.0096">GBP (approx)</option>
+                <option value="1">INR</option>
+              </select>
+              <div class="action">
+                <button class="btn action" onclick="conv()">Convert</button>
+                <button class="btn" onclick="fillCurrency()">Sample</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="output" id="currOut">Converted amount</div>
+              <div style="margin-top:10px;font-size:13px;color:rgba(255,255,255,0.7)">
+                Note: Rates are approximate. Update values before use.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="note">Single-file assignment tool • Save & submit the HTML file • No back-end required</footer>
+      </section>
+    </main>
+  </div>
+
+<script>
+/* ---------- UI activation ---------- */
+function activate(el){
+  document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const target = el.getAttribute('data-target');
+  document.querySelectorAll('.tool-panel').forEach(p=>p.style.display='none');
+  document.getElementById(target).style.display = 'block';
+}
+
+/* ---------- Interest Tool ---------- */
+function fillExample(){
+  document.getElementById('p').value = 500000;
+  document.getElementById('r').value = 9;
+  document.getElementById('t').value = 5;
+  interestCalc();
+}
+
+function interestCalc(){
+  const p = Number(document.getElementById('p').value)||0;
+  const r = Number(document.getElementById('r').value)||0;
+  const t = Number(document.getElementById('t').value)||0;
+
+  const si = (p * r * t) / 100;
+  const ci = p * Math.pow(1 + r/100, t) - p;
+  const out = document.getElementById('interestOut');
+  out.innerHTML = `<div>Simple Interest: ₹${si.toFixed(2)}</div>
+                   <div>Compound Interest: ₹${ci.toFixed(2)}</div>
+                   <div class="tiny" style="margin-top:6px">Total SI: ₹${(p+si).toFixed(2)} • Total CI: ₹${(p+ci).toFixed(2)}</div>`;
+
+  // chart
+  const canvas = document.getElementById('interestChart');
+  const ctx = canvas.getContext('2d');
+  // responsive canvas sizing
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // draw bars with smooth scaling
+  const maxVal = Math.max(si,ci,p);
+  const scale = (canvas.height - 60) / (maxVal || 1);
+  const barW = Math.min(160, canvas.width * 0.25);
+
+  // SI bar
+  const siH = si * scale;
+  ctx.fillStyle = 'rgba(6,182,212,0.92)';
+  roundedRect(ctx, canvas.width*0.18, canvas.height - siH - 40, barW, siH, 10);
+  ctx.fill();
+
+  // CI bar
+  const ciH = ci * scale;
+  ctx.fillStyle = 'rgba(124,58,237,0.92)';
+  roundedRect(ctx, canvas.width*0.55, canvas.height - ciH - 40, barW, ciH, 10);
+  ctx.fill();
+
+  // labels
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.font = '600 14px sans-serif';
+  ctx.fillText('SI', canvas.width*0.18 + barW/2 - 10, canvas.height - 12);
+  ctx.fillText('CI', canvas.width*0.55 + barW/2 - 10, canvas.height - 12);
+  ctx.font = '400 12px sans-serif';
+  ctx.fillText('Values in ₹', 12, 18);
+
+  // small numeric labels above bars
+  ctx.fillText('₹' + Number(si.toFixed(0)).toLocaleString(), canvas.width*0.18 + 8, canvas.height - siH - 48);
+  ctx.fillText('₹' + Number(ci.toFixed(0)).toLocaleString(), canvas.width*0.55 + 8, canvas.height - ciH - 48);
+}
+
+function roundedRect(ctx, x, y, width, height, radius){
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.arcTo(x + width, y, x + width, y + radius, radius);
+  ctx.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+  ctx.arcTo(x, y + height, x, y + height - radius, radius);
+  ctx.arcTo(x, y, x + radius, y, radius);
+  ctx.closePath();
+}
+
+/* ---------- Budget ---------- */
+function fillBudget(){ document.getElementById('income').value = 40000; document.getElementById('expense').value = 25000; budgetCalc(); }
+
+function budgetCalc(){
+  const income = Number(document.getElementById('income').value)||0;
+  const expense = Number(document.getElementById('expense').value)||0;
+  const savings = Math.max(0, income - expense);
+  document.getElementById('budgetOut').innerHTML = `<div>Income: ₹${income.toLocaleString()}</div><div>Expenses: ₹${expense.toLocaleString()}</div><div style="margin-top:6px">Savings: ₹${savings.toLocaleString()}</div>`;
+
+  const c = document.getElementById('budgetChart');
+  const ctx = c.getContext('2d');
+  c.width = c.clientWidth; c.height = c.clientHeight;
+  ctx.clearRect(0,0,c.width,c.height);
+
+  const total = Math.max(1, income);
+  const expAngle = (expense/total) * Math.PI * 2;
+  // draw background circle
+  const cx = c.width/2, cy = c.height/2, r = Math.min(cx,cy) - 10;
+  // expenses
+  ctx.beginPath();
+  ctx.moveTo(cx,cy);
+  ctx.fillStyle = 'rgba(239,83,80,0.95)';
+  ctx.arc(cx,cy,r,-Math.PI/2, -Math.PI/2 + expAngle);
+  ctx.fill();
+  // savings
+  ctx.beginPath();
+  ctx.moveTo(cx,cy);
+  ctx.fillStyle = 'rgba(16,185,129,0.95)';
+  ctx.arc(cx,cy,r, -Math.PI/2 + expAngle, -Math.PI/2 + expAngle + (savings/total)*Math.PI*2);
+  ctx.fill();
+
+  // legend
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.font = '600 13px sans-serif';
+  ctx.fillText('Expenses', 14, 22);
+  ctx.fillStyle = 'rgba(239,83,80,0.95)';
+  ctx.fillRect(80,10,14,10);
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.fillText('Savings', 140, 22);
+  ctx.fillStyle = 'rgba(16,185,129,0.95)';
+  ctx.fillRect(200,10,14,10);
+}
+
+/* ---------- Affordability ---------- */
+function fillAfford(){ document.getElementById('emi').value = 10375; document.getElementById('inc').value = 40000; affordCheck(); }
+
+function affordCheck(){
+  const emi = Number(document.getElementById('emi').value)||0;
+  const inc = Number(document.getElementById('inc').value)||1;
+  const ratio = (emi/inc)*100;
+  let msg = '', color = '';
+  if(ratio <= 30){ msg = 'Affordable 👍 (Good)'; color = 'var(--success)'; }
+  else if(ratio <= 40){ msg = 'Borderline ⚠ (Consider review)'; color = '#f59e0b'; }
+  else { msg = 'Not Recommended ❌ (High EMI)'; color = 'var(--danger)'; }
+
+  document.getElementById('affordOut').innerHTML = `<div>EMI-to-Income Ratio: <b>${ratio.toFixed(2)}%</b></div><div style="margin-top:8px;color:${color};font-weight:700">${msg}</div>`;
+}
+
+/* ---------- Savings ---------- */
+function fillSavings(){ document.getElementById('goal').value = 200000; document.getElementById('months').value = 24; goalCalc(); }
+
+function goalCalc(){
+  const g = Number(document.getElementById('goal').value)||0;
+  const m = Number(document.getElementById('months').value)||1;
+  const per = g / m;
+  document.getElementById('goalOut').innerHTML = `You must save <b>₹${per.toFixed(2)}</b> per month to reach ₹${g.toLocaleString()} in ${m} months.`;
+}
+
+/* ---------- Currency ---------- */
+function fillCurrency(){ document.getElementById('amt').value = 1000; document.getElementById('curr').value = 0.012; conv(); }
+
+function conv(){
+  const a = Number(document.getElementById('amt').value)||0;
+  const rate = Number(document.getElementById('curr').value)||1;
+  const res = a * rate;
+  document.getElementById('currOut').innerHTML = `Converted Amount: <b>${res.toFixed(2)}</b>`;
+}
+
+/* ---------- Theme toggle (light simulation) ---------- */
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  const root = document.documentElement;
+  if(root.style.getPropertyValue('--bg1') === '' || root.style.getPropertyValue('--bg1').includes('#0f172a')){
+    // switch to light-ish theme (subtle)
+    root.style.setProperty('--bg1', 'linear-gradient(135deg,#f8fafc 0%, #e6eef8 40%, #dbeefc 100%)');
+    root.style.setProperty('--card', 'rgba(2,6,23,0.04)');
+    root.style.setProperty('--muted', 'rgba(2,6,23,0.64)');
+    root.style.setProperty('--glass-border', 'rgba(2,6,23,0.06)');
+    root.style.setProperty('--shadow', '0 12px 30px rgba(6,9,25,0.06)');
+    document.body.style.color = '#031026';
+  } else {
+    // revert to dark
+    root.style.setProperty('--bg1', 'linear-gradient(135deg,#0f172a 0%, #0b3a66 40%, #05223a 100%)');
+    root.style.setProperty('--card', 'rgba(255,255,255,0.06)');
+    root.style.setProperty('--muted', 'rgba(255,255,255,0.78)');
+    root.style.setProperty('--glass-border', 'rgba(255,255,255,0.06)');
+    root.style.setProperty('--shadow', '0 8px 30px rgba(2,6,23,0.6)');
+    document.body.style.color = '#e6eef8';
+  }
+});
+
+/* ---------- Download HTML (convenience) ---------- */
+function downloadHtml(){
+  const html = document.documentElement.outerHTML;
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'finance_suite_attractive.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
